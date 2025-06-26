@@ -2,6 +2,19 @@
 
 A Cloudflare Worker-based bot that monitors VI (Vodafone Idea) for unlimited 4G/5G data plans and sends real-time notifications via Telegram when these plans become available.
 
+## 💡 Why This Bot?
+
+Tired of manually checking daily whether VI has unlimited data plans available in your area? This bot solves that problem by:
+
+- **🔍 Eliminates Manual Checking**: No more daily visits to VI's website or app
+- **⚡ Early Notifications**: Get notified immediately when plans become available
+- **🎯 Area-Specific Monitoring**: Tracks availability for your specific location
+- **⏰ 24/7 Monitoring**: Continuous checking even when you're busy or sleeping
+
+**Problem**: VI's unlimited plans (4G full-day, 5G unlimited) are rolled out state-wise, with only select states getting access to these plans at any given time.
+
+**Solution**: Automated monitoring with instant Telegram alerts, so you know immediately when these plans become available in your state!
+
 ## 🚀 Features
 
 - **Automated Monitoring**: Continuously checks VI's API for unlimited data plans
