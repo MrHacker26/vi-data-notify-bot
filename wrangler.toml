@@ -1,0 +1,11 @@
+name = "vi-unlimited-checker"
+main = "dist/worker.js"
+compatibility_date = "2025-06-26"
+workers_dev = true
+
+[triggers]
+crons = ["0 */5 * * *"] # Every 5 hours (5 times a day)
+
+[observability]
+enabled = true
+head_sampling_rate = 1
