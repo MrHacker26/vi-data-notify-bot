@@ -4,22 +4,31 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "start": "bun run index.ts",
-    "build": "tsc",
+    "dev": "wrangler dev --env .env",
+    "start": "bun run src/index.ts",
+    "build": "tsup",
+    "build:watch": "tsup --watch",
+    "deploy": "wrangler deploy",
     "format": "prettier --write src/**/*.ts",
-    "lint": "eslint . --ext .ts",
-    "lint:fix": "eslint . --ext .ts --fix",
+    "lint": "eslint src --ext .ts",
+    "lint:fix": "eslint src --ext .ts --fix",
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250620.0",
     "@eslint/js": "^9.29.0",
     "@types/bun": "latest",
     "eslint": "^9.29.0",
     "globals": "^16.2.0",
     "prettier": "^3.6.1",
-    "typescript-eslint": "^8.35.0"
+    "tsup": "^8.5.0",
+    "typescript-eslint": "^8.35.0",
+    "wrangler": "^4.22.0"
   },
   "peerDependencies": {
     "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "zod": "^3.25.67"
   }
 }
