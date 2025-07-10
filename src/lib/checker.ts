@@ -1,5 +1,7 @@
 import type { Env } from 'src/worker'
 import { z } from 'zod'
+import { fetchWithTimeout } from './fetch'
+import { FETCH_TIMEOUT_MS } from './constants'
 
 const viPlanSchema = z.object({
   PROMOTION_TITLE: z.string(),
@@ -8,12 +10,21 @@ const viPlanSchema = z.object({
 })
 
 export async function hasUnlimitedDataPlan(env: Env): Promise<boolean> {
-  const res = await fetch(env.VI_API_URL)
+  const res = await fetchWithTimeout(env.VI_API_URL, FETCH_TIMEOUT_MS)
+
   const json = await res.json()
-  if (!Array.isArray(json)) return false
+
+  if (!Array.isArray(json)) {
+    return false
+  }
+
   return json.some(plan => {
     const safe = viPlanSchema.safeParse(plan)
-    if (!safe.success) return false
+
+    if (!safe.success) {
+      return false
+    }
+
     const { PROMOTION_TITLE, READ_MORE, DATA_LINE_1 } = safe.data
 
     const title = PROMOTION_TITLE.toLowerCase()
