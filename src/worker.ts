@@ -2,12 +2,14 @@ import { sendTelegramMessage } from './lib/bot'
 import { checkIsUpdated5gStates } from './lib/check-5g-states'
 import { hasUnlimitedDataPlan } from './lib/checker'
 import { parseEnv } from './lib/env'
+import { fetchPressReleases } from './lib/press-release'
 
 export type Env = {
   TELEGRAM_BOT_TOKEN: string
   USER_CHAT_ID: string
   VI_API_URL: string
   VI_FIVEG_STATE_LIST_API: string
+  VI_PRESS_RELEASE_API: string
 }
 
 export default {
@@ -20,7 +22,8 @@ export default {
       : '⚠️ No unlimited plan available yet. Please check back later.'
 
     const { msg: stateMsg } = await checkIsUpdated5gStates(env)
-    const fullMessage = `${planMsg}\n\n${stateMsg}`
+    const { msg: pressReleaseMsg } = await fetchPressReleases(env)
+    const fullMessage = `${planMsg}\n\n${stateMsg}\n\n${pressReleaseMsg}`
 
     await sendTelegramMessage(fullMessage, env)
   },
