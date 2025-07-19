@@ -17,9 +17,7 @@ export default {
     const env = parseEnv(envVars)
     const hasPlan = await hasUnlimitedDataPlan(env)
 
-    const planMsg = hasPlan
-      ? '🚨 *Unlimited Data Plan is now available!*'
-      : '⚠️ No unlimited plan available yet. Please check back later.'
+    const planMsg = hasPlan ? '🚨 *Unlimited Data Plan is now available!*' : '⚠️ No unlimited plan available yet.'
 
     const { msg: stateMsg } = await checkIsUpdated5gStates(env)
     const { msg: pressReleaseMsg } = await fetchPressReleases(env)
