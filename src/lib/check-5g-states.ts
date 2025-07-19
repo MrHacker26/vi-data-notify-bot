@@ -6,7 +6,8 @@ import { FETCH_TIMEOUT_MS, MINIMUM_NEW_STATE_COUNT } from './constants'
 const resSchema = z.object({
   brands: z.array(
     z.object({
-      city: z.array(z.string()),
+      upcmgcity: z.array(z.string()).optional(),
+      city: z.array(z.string()).optional(),
       state: z.string(),
     }),
   ),
@@ -31,7 +32,7 @@ export async function checkIsUpdated5gStates(env: Env): Promise<Check5gStatesRes
       return { status: 'error', msg: `❌ Failed to parse 5G state data.` }
     }
 
-    const states = parsedData.data.brands.map(brand => brand.state)
+    const states = parsedData.data.brands.filter(brand => !brand.upcmgcity).map(brand => brand.state)
 
     if (states.length > MINIMUM_NEW_STATE_COUNT) {
       return {
