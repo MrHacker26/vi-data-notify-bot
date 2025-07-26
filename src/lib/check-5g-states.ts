@@ -32,7 +32,11 @@ export async function checkIsUpdated5gStates(env: Env): Promise<Check5gStatesRes
       return { status: 'error', msg: `❌ Failed to parse 5G state data.` }
     }
 
-    const states = parsedData.data.brands.filter(brand => !brand.upcmgcity).map(brand => brand.state)
+    const states = parsedData.data.brands
+      .filter(brand => {
+        return brand.city && brand.state
+      })
+      .map(brand => brand.state)
 
     if (states.length > MINIMUM_NEW_STATE_COUNT) {
       return {
