@@ -15,13 +15,11 @@ export type Env = {
 export default {
   async scheduled(_: ScheduledEvent, envVars: Env) {
     const env = parseEnv(envVars)
-    const hasPlan = await hasUnlimitedDataPlan(env)
-
-    const planMsg = hasPlan ? '🚨 *Unlimited Data Plan is now available!*' : '⚠️ No unlimited plan available yet.'
+    const { planDetails } = await hasUnlimitedDataPlan(env)
 
     const { msg: stateMsg } = await checkIsUpdated5gStates(env)
     const { msg: pressReleaseMsg } = await fetchPressReleases(env)
-    const fullMessage = `${planMsg}\n\n${stateMsg}\n\n${pressReleaseMsg}`
+    const fullMessage = `${planDetails}\n\n${stateMsg}\n\n${pressReleaseMsg}`
 
     await sendTelegramMessage(fullMessage, env)
   },
