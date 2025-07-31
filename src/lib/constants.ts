@@ -1,2 +1,2 @@
-export const MINIMUM_NEW_STATE_COUNT = 8
+export const MINIMUM_NEW_STATE_COUNT = 10
 export const FETCH_TIMEOUT_MS = 5000
