@@ -1,5 +1,7 @@
 # VI Data Notify Bot 📱🔔
 
+> **Note:** This project is no longer actively maintained. The goal of receiving 5G updates for my location has been achieved. The code is available for anyone who wants to fork and adapt it.
+
 A Cloudflare Worker-based bot that monitors VI (Vodafone Idea) for unlimited 4G/5G data plans and sends real-time notifications via Telegram when these plans become available.
 
 ## 💡 Why This Bot?
